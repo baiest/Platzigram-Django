@@ -1,2 +1,2 @@
 # Platzigram-Django
-Proyecto de platzi para praxticar Django
+Proyecto de platzi para practicar Django
