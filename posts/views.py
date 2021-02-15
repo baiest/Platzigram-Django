@@ -34,4 +34,8 @@ posts = [
 
 @login_required
 def list_posts(request):
-    return render(request, 'posts/feed.html', {'posts': posts})
+    profile = request.user.profile
+    return render(request, 'posts/feed.html', 
+    {'posts': posts, 
+    'profile':profile,
+    'user':request.user,})

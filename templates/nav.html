@@ -8,7 +8,9 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a href="">
-                        <img src="{% static 'img/default-profile.png' %}" height="35" alt="" class="d-inline-block align-top rounded-circle">
+                        {% if profile.picture %}
+                <img src="{{ profile.picture.url }}" class="rounded-circle" style="object-fit: cover;" height="50" width="50"> {% else %}
+                <img src="{% static 'img/default-profile.png' %}" class="rounded-circle" height="50"> {% endif %}
                     </a>
                 </li>
                 <li class="nav-item nav-icon">
