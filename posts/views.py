@@ -39,3 +39,7 @@ def list_posts(request):
     {'posts': posts, 
     'profile':profile,
     'user':request.user,})
+
+@login_required
+def create_post(request):
+    pass
