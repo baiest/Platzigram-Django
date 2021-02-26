@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 from users.models import Profile
 
 # forms
-from users.forms import ProfileForm
+from users.forms import ProfileForm, SignupForm
 
 @login_required
 def update_profile(request):
@@ -60,24 +60,16 @@ def logout_view(request):
 
 def signup(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        passwd = request.POST['pass']
-        passwd_confirmation= request.POST['pass_confirmation']
-
-        if passwd != passwd_confirmation:
-            return render(request, 'users/signup.html', {'error': 'Password confirmation does not match'})
-        
-        try:
-            user = User.objects.create_user(username=username, password=passwd) 
-        except IntegrityError:
-            return render(request, 'users/signup.html', {'error': 'User already exists'})
-        
-        user.first_name = request.POST['first_name']
-        user.last_name = request.POST['last_name']
-        user.email = request.POST['email']
-        user.save()
-
-        profile = Profile(user=user)
-        profile.save()
-        return redirect('login')
-    return render(request, 'users/signup.html')
+       form = SignupForm(request.POST)
+       if form.is_valid():
+           form.save()
+           return redirect('login')
+    
+    else:
+        form = SignupForm()
+    
+    return render(
+        request=request,
+        template_name='users/signup.html',
+        context={'form':form}
+    )
