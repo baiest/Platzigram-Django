@@ -1,20 +1,20 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg fixed-top" id='main-navbar'>
     <div class="container">
-        <a href="" class="navbar-brand pr-5" style="border-right: 1px solid #EFEFEF;">
+        <a href="{% url 'feed' %}" class="navbar-brand pr-5" style="border-right: 1px solid #EFEFEF;">
             <img src="{% static 'img/instagram.png' %}" height="45" class="d-inline-block align-top">
         </a>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{% url 'update_profile' %}">
                         {% if profile.picture %}
                 <img src="{{ profile.picture.url }}" class="rounded-circle" style="object-fit: cover;" height="50" width="50"> {% else %}
                 <img src="{% static 'img/default-profile.png' %}" class="rounded-circle" height="50"> {% endif %}
                     </a>
                 </li>
                 <li class="nav-item nav-icon">
-                    <a href="">
+                    <a href="{% url 'create_post'%}">
                         <i class="fas fa-plus"></i>
                     </a>
                 </li>
