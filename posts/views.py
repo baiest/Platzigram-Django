@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from datetime import datetime
@@ -44,6 +44,10 @@ class PostsFeedView(LoginRequiredMixin, ListView):
     paginate_by= 2
     context_object_name = 'posts'
 
+class PostDetailView(LoginRequiredMixin, DetailView):
+    template_name = 'posts/detail.html'
+    queryset = Post.objects.all()
+    context_object_name = 'post'
 
 @login_required
 def list_posts(request):
