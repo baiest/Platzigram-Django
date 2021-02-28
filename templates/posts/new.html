@@ -9,8 +9,7 @@
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="hidden" name="user" value="{{ user.pk }}">
-                <input type="hidden" name="profile" value="{{ profile.pk }}"> {% for error in form.errors %}
-                {% endfor %}
+                <input type="hidden" name="profile" value="{{ profile.pk }}"> {% for error in form.errors %} {% endfor %}
                 <div class="form-group">
                     <input type="text" class="form-control {% if form.title.errors %} is-invalid {% endif %}" name="title" placeholder="Title">
                     <div class="invalid-feedback">
