@@ -7,9 +7,9 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a href="{% url 'users:update_profile' %}">
-                        {% if profile.picture %}
-                <img src="{{ profile.picture.url }}" class="rounded-circle" style="object-fit: cover;" height="50" width="50"> {% else %}
+                    <a href="{% url 'users:detail' request.user.username %}">
+                        {% if request.user.profile.picture %}
+                <img src="{{ request.user.profile.picture.url }}" class="rounded-circle" style="object-fit: cover;" height="50" width="50"> {% else %}
                 <img src="{% static 'img/default-profile.png' %}" class="rounded-circle" height="50"> {% endif %}
                     </a>
                 </li>

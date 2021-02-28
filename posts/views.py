@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from datetime import datetime
 from posts.models import Post
 
@@ -33,6 +36,14 @@ posts = [
         'photo': 'https://picsum.photos/500/500?image=785'
     }
 ]
+
+class PostsFeedView(LoginRequiredMixin, ListView):
+    template_name= "posts/feed.html"
+    model = Post
+    ordering= ('-created')
+    paginate_by= 2
+    context_object_name = 'posts'
+
 
 @login_required
 def list_posts(request):
