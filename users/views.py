@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render, reverse
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, FormView, UpdateView
+from django.contrib.auth import views as auth_views
 # Exceptions
 
 from django.db.utils import IntegrityError
@@ -78,6 +79,12 @@ def update_profile(request):
             'user':request.user,
             'form':form
         })
+
+class LoginView(auth_views.LoginView):
+
+    template_name = 'users/login.html'
+
+"""
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -90,7 +97,7 @@ def login_view(request):
         else:
             return render(request, 'users/login.html', {'error': 'Usuario o contraseña incorrectos'})
     return render(request, 'users/login.html')
-
+"""
 @login_required
 def logout_view(request):
     logout(request)
