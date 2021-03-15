@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+
 
 from datetime import datetime
 from posts.models import Post
@@ -49,6 +51,17 @@ class PostDetailView(LoginRequiredMixin, DetailView):
     queryset = Post.objects.all()
     context_object_name = 'post'
 
+class CreatePostView(LoginRequiredMixin, CreateView):
+    template_name = 'posts/new.html'
+    form_class = PostForm
+    success_url = reverse_lazy('posts:feed')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.request.user
+        context['profile'] = self.request.user.profile
+        return context
+        
 @login_required
 def list_posts(request):
 
