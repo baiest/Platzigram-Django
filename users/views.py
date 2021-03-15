@@ -98,11 +98,15 @@ def login_view(request):
             return render(request, 'users/login.html', {'error': 'Usuario o contraseña incorrectos'})
     return render(request, 'users/login.html')
 """
+
+class LogoutView(LoginRequiredMixin, auth_views.LogoutView):
+    template_name = 'users/login.html'
+"""    
 @login_required
 def logout_view(request):
     logout(request)
     return redirect('users:login')
-
+"""
 def signup(request):
     if request.method == 'POST':
        form = SignupForm(request.POST)
